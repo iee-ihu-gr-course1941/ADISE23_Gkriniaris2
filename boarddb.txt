@@ -147,3 +147,15 @@ BEGIN
 		REPLACE INTO board SELECT * FROM board_empty;
 END $$
 DELIMITER ;
+
+-------ΔΗΜΙΟΥΡΓΙΑ ΠΙΝΑΚΑ ΠΑΙΧΤΙ---------
+CREATE TABLE `players` (
+	`username` VARCHAR(20) DEFAULT NULL,
+	`piece_color` ENUM('R','G','B','Y') NOT NULL,
+	`token` VARCHAR(100) DEFAULT NULL,
+	`last_action` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`piece_color`)
+)
+
+------------ΣΤΟΙΧΕΙΑ ΠΙΝΑΚΑ--------------
+INSERT INTO `players` VALUES (NULL ,'B' , NULL , NULL ),(NULL ,'G' , NULL , NULL ),(NULL ,'R' , NULL , NULL ),(NULL ,'Y' , NULL , NULL )
