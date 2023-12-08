@@ -159,3 +159,17 @@ CREATE TABLE `players` (
 
 ------------ΣΤΟΙΧΕΙΑ ΠΙΝΑΚΑ--------------
 INSERT INTO `players` VALUES (NULL ,'B' , NULL , NULL ),(NULL ,'G' , NULL , NULL ),(NULL ,'R' , NULL , NULL ),(NULL ,'Y' , NULL , NULL )
+
+
+------------GAME STATUS------------------
+CREATE TABLE `game_status` (
+	`status` ENUM('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
+	`p_turn` enum('R','G','B','Y') DEFAULT NULL,
+	`result` enum('R','G','B','Y','D') DEFAULT NULL,
+	`last_change` timestamp NULL DEFAULT NULL
+)
+
+--------TRIGER ΓΙΑ ΤΟ GAME STATUS--------
+
+
+-------------
