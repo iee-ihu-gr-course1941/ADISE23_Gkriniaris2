@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `board` (
 -- Dumping data for table gkriniaris.board: ~122 rows (approximately)
 INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
 	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
-	(1, 1, 'R', NULL, NULL, NULL, NULL, NULL, NULL),
+	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 4, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -51,7 +51,7 @@ INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_p
 	(2, 2, 'R', 'R', 'PR4', NULL, NULL, NULL, NULL),
 	(2, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
 	(2, 4, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 5, 'W', 'R', '', 7, 37, 27, 17),
+	(2, 5, 'W', NULL, NULL, 7, 37, 27, 17),
 	(2, 6, 'B', NULL, NULL, NULL, 40, NULL, NULL),
 	(2, 7, 'W', NULL, NULL, 11, 1, 31, 21),
 	(2, 8, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -319,9 +319,15 @@ INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
 
 -- Dumping structure for procedure gkriniaris.move_piece
 DELIMITER //
-CREATE PROCEDURE `move_piece`( x1 TINYINT , y1 TINYINT , x2 TINYINT , y2 TINYINT )
+CREATE PROCEDURE `move_piece`(
+	IN `x1` TINYINT,
+	IN `y1` TINYINT,
+	IN `x2` TINYINT,
+	IN `y2` TINYINT
+)
 BEGIN
 	DECLARE p,p_color CHAR;
+	
 	SELECT piece , piece_color INTO p,p_color FROM `board` WHERE X=x1 AND Y=y1;
 	
 	UPDATE board
@@ -332,7 +338,12 @@ BEGIN
 	SET piece=NULL, piece_color=NULL
 	WHERE X=x1 AND Y=y1;
 	
-	UPDATE game_status SET p_turn=if(p_color= 'R','B','R');
+	UPDATE game_status
+	SET p_turn = 
+	    IF(p_color = 'R', 'B',
+	    IF(p_color = 'B', 'Y',
+	    IF(p_color = 'Y', 'G',
+	    IF(p_color = 'G', 'R', p_turn))));
     END//
 DELIMITER ;
 
