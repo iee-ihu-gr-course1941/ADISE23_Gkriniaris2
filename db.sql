@@ -305,6 +305,23 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Dumping structure for πίνακας gkriniaris.dice
+CREATE TABLE IF NOT EXISTS `dice` (
+  `prev_x` tinyint(4) DEFAULT NULL,
+  `prev_y` tinyint(4) DEFAULT NULL,
+  `new_x` tinyint(4) DEFAULT NULL,
+  `new_y` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `p_turn` enum('R','G','B','Y') DEFAULT NULL,
+  `piece` varchar(3) NOT NULL,
+  `dice` tinyint(4) DEFAULT NULL,
+  `prev_path` tinyint(4) DEFAULT NULL,
+  `new_path` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`piece`,`created_at`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table gkriniaris.dice: ~0 rows (approximately)
+
 -- Dumping structure for πίνακας gkriniaris.game_status
 CREATE TABLE IF NOT EXISTS `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
@@ -313,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `game_status` (
   `last_change` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.game_status: ~1 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
 	('started', 'Y', 'D', '2023-12-08 14:00:25');
 
