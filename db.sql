@@ -332,7 +332,7 @@ BEGIN
 	
 	UPDATE board
 	SET piece=p, piece_color=p_color
-	WHERE x=x2 AND y=y2;
+	WHERE X=x2 AND Y=y2;
 	
 	UPDATE board
 	SET piece=NULL, piece_color=NULL
