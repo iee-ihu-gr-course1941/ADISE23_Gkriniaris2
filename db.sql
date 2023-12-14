@@ -302,7 +302,7 @@ DELIMITER //
 CREATE PROCEDURE `clean_board`()
 BEGIN 
 		REPLACE INTO board SELECT * FROM board_empty;
-		REPLACE INTO dice SELECT * FROM dice_reset;
+		REPLACE INTO dice SELECT * FROM dice_empty;
 END//
 DELIMITER ;
 
@@ -384,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `game_status` (
 
 -- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
-	('started', 'Y', 'D', '2023-12-08 14:00:25');
+	('started', 'B', 'D', '2023-12-14 13:41:39');
 
 -- Dumping structure for procedure gkriniaris.move_piece
 DELIMITER //
@@ -395,18 +395,19 @@ CREATE PROCEDURE `move_piece`(
 	IN `y2` TINYINT
 )
 BEGIN
-	DECLARE p,p_color CHAR;
+	DECLARE p,p_color VARCHAR(3);
 	
 	SELECT piece , piece_color INTO p,p_color FROM `board` WHERE X=x1 AND Y=y1;
-	
-	UPDATE board
-	SET piece=p, piece_color=p_color
-	WHERE X=x2 AND Y=y2;
 	
 	UPDATE board
 	SET piece=NULL, piece_color=NULL
 	WHERE X=x1 AND Y=y1;
 	
+	UPDATE board
+	SET piece=p, piece_color=p_color
+	WHERE X=x2 AND Y=y2;
+	
+
 	UPDATE game_status
 	SET p_turn = 
 	    IF(p_color = 'R', 'B',
