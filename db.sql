@@ -302,6 +302,7 @@ DELIMITER //
 CREATE PROCEDURE `clean_board`()
 BEGIN 
 		REPLACE INTO board SELECT * FROM board_empty;
+		REPLACE INTO dice SELECT * FROM dice_reset;
 END//
 DELIMITER ;
 
@@ -320,7 +321,58 @@ CREATE TABLE IF NOT EXISTS `dice` (
   PRIMARY KEY (`piece`,`created_at`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.dice: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.dice: ~16 rows (approximately)
+INSERT INTO `dice` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
+
+-- Dumping structure for πίνακας gkriniaris.dice_empty
+CREATE TABLE IF NOT EXISTS `dice_empty` (
+  `prev_x` tinyint(4) DEFAULT NULL,
+  `prev_y` tinyint(4) DEFAULT NULL,
+  `new_x` tinyint(4) DEFAULT NULL,
+  `new_y` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `p_turn` enum('R','G','B','Y') DEFAULT NULL,
+  `piece` varchar(3) NOT NULL,
+  `dice` tinyint(4) DEFAULT NULL,
+  `prev_path` tinyint(4) DEFAULT NULL,
+  `new_path` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`piece`,`created_at`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table gkriniaris.dice_empty: ~16 rows (approximately)
+INSERT INTO `dice_empty` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.game_status
 CREATE TABLE IF NOT EXISTS `game_status` (
@@ -330,7 +382,7 @@ CREATE TABLE IF NOT EXISTS `game_status` (
   `last_change` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.game_status: ~1 rows (approximately)
+-- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
 	('started', 'Y', 'D', '2023-12-08 14:00:25');
 
