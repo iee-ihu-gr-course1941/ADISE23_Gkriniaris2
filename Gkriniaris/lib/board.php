@@ -1,27 +1,26 @@
 <?php
-function show_board(){
+
+function show_board() {
     global $mysqli;
 
-    $sql = 'select * from board';
-    $st = $mysqli->prepare($sql);
+    $sql = "SELECT * FROM board";
+    $st = $mysqli -> prepare($sql);
 
-    $st->execute();
-    $res = $st->get_result();
+    $st -> execute();
+    $res = $st -> get_result();
 
+    $data = $res->fetch_all(MYSQLI_ASSOC);
     header('Content-type: application/json');
-    print json_encode($res->fetch_all(MYSQLI_ASSOC),JSON_PRETTY_PRINT);
+    print json_encode($data, JSON_PRETTY_PRINT);
+
 }
 
-function reset_board(){
+function reset_board() {
     global $mysqli;
 
     $sql = 'call clean_board()';
-    $mysqli->query($sql);
+    $mysqli -> query($sql);
     show_board();
 }
-
-
-
-
 
 ?>
