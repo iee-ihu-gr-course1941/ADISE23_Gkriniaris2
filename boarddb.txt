@@ -148,7 +148,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--------ΔΗΜΙΟΥΡΓΙΑ ΠΙΝΑΚΑ ΠΑΙΧΤΙ---------
+-------ΔΗΜΙΟΥΡΓΙΑ ΠΙΝΑΚΑ ΠΑΙΧΤΗ---------
 CREATE TABLE `players` (
 	`username` VARCHAR(20) DEFAULT NULL,
 	`piece_color` ENUM('R','G','B','Y') NOT NULL,
@@ -172,4 +172,34 @@ CREATE TABLE `game_status` (
 --------TRIGER ΓΙΑ ΤΟ GAME STATUS--------
 
 
--------------
+------------- MOVE PIECE-----------------
+DELIMITER ;;
+CREATE PROCEDURE `move_piece`(
+	IN `x1` TINYINT,
+	IN `y1` TINYINT,
+	IN `x2` TINYINT,
+	IN `y2` TINYINT
+)
+BEGIN
+	DECLARE p,p_color CHAR;
+	
+	SELECT piece , piece_color INTO p,p_color FROM `board` WHERE X=x1 AND Y=y1;
+	
+	UPDATE board
+	SET piece=p, piece_color=p_color
+	WHERE x=x2 AND y=y2;
+	
+	UPDATE board
+	SET piece=NULL, piece_color=NULL
+	WHERE X=x1 AND Y=y1;
+	
+	UPDATE game_status
+	SET p_turn = 
+	    IF(p_color = 'R', 'B',
+	    IF(p_color = 'B', 'Y',
+	    IF(p_color = 'Y', 'G',
+	    IF(p_color = 'G', 'R', p_turn))));
+    END ;;
+DELIMITER ;
+    
+

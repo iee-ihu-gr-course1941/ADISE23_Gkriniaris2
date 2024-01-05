@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `board` (
 -- Dumping data for table gkriniaris.board: ~122 rows (approximately)
 INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
 	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
-	(1, 1, 'R', NULL, NULL, NULL, NULL, NULL, NULL),
+	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 4, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -51,7 +51,7 @@ INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_p
 	(2, 2, 'R', 'R', 'PR4', NULL, NULL, NULL, NULL),
 	(2, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
 	(2, 4, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 5, 'W', 'R', '', 7, 37, 27, 17),
+	(2, 5, 'W', NULL, NULL, 7, 37, 27, 17),
 	(2, 6, 'B', NULL, NULL, NULL, 40, NULL, NULL),
 	(2, 7, 'W', NULL, NULL, 11, 1, 31, 21),
 	(2, 8, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -302,8 +302,77 @@ DELIMITER //
 CREATE PROCEDURE `clean_board`()
 BEGIN 
 		REPLACE INTO board SELECT * FROM board_empty;
+		REPLACE INTO dice SELECT * FROM dice_empty;
 END//
 DELIMITER ;
+
+-- Dumping structure for πίνακας gkriniaris.dice
+CREATE TABLE IF NOT EXISTS `dice` (
+  `prev_x` tinyint(4) DEFAULT NULL,
+  `prev_y` tinyint(4) DEFAULT NULL,
+  `new_x` tinyint(4) DEFAULT NULL,
+  `new_y` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `p_turn` enum('R','G','B','Y') DEFAULT NULL,
+  `piece` varchar(3) NOT NULL,
+  `dice` tinyint(4) DEFAULT NULL,
+  `prev_path` tinyint(4) DEFAULT NULL,
+  `new_path` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`piece`,`created_at`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table gkriniaris.dice: ~16 rows (approximately)
+INSERT INTO `dice` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
+
+-- Dumping structure for πίνακας gkriniaris.dice_empty
+CREATE TABLE IF NOT EXISTS `dice_empty` (
+  `prev_x` tinyint(4) DEFAULT NULL,
+  `prev_y` tinyint(4) DEFAULT NULL,
+  `new_x` tinyint(4) DEFAULT NULL,
+  `new_y` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `p_turn` enum('R','G','B','Y') DEFAULT NULL,
+  `piece` varchar(3) NOT NULL,
+  `dice` tinyint(4) DEFAULT NULL,
+  `prev_path` tinyint(4) DEFAULT NULL,
+  `new_path` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`piece`,`created_at`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table gkriniaris.dice_empty: ~16 rows (approximately)
+INSERT INTO `dice_empty` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.game_status
 CREATE TABLE IF NOT EXISTS `game_status` (
@@ -315,24 +384,36 @@ CREATE TABLE IF NOT EXISTS `game_status` (
 
 -- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
-	('started', 'Y', 'D', '2023-12-08 14:00:25');
+	('started', 'B', 'D', '2023-12-14 13:41:39');
 
 -- Dumping structure for procedure gkriniaris.move_piece
 DELIMITER //
-CREATE PROCEDURE `move_piece`( x1 TINYINT , y1 TINYINT , x2 TINYINT , y2 TINYINT )
+CREATE PROCEDURE `move_piece`(
+	IN `x1` TINYINT,
+	IN `y1` TINYINT,
+	IN `x2` TINYINT,
+	IN `y2` TINYINT
+)
 BEGIN
-	DECLARE p,p_color CHAR;
-	SELECT piece , piece_color INTO p,p_color FROM `board` WHERE X=x1 AND Y=y1;
+	DECLARE p,p_color VARCHAR(3);
 	
-	UPDATE board
-	SET piece=p, piece_color=p_color
-	WHERE x=x2 AND y=y2;
+	SELECT piece , piece_color INTO p,p_color FROM `board` WHERE X=x1 AND Y=y1;
 	
 	UPDATE board
 	SET piece=NULL, piece_color=NULL
 	WHERE X=x1 AND Y=y1;
 	
-	UPDATE game_status SET p_turn=if(p_color= 'R','B','R');
+	UPDATE board
+	SET piece=p, piece_color=p_color
+	WHERE X=x2 AND Y=y2;
+	
+
+	UPDATE game_status
+	SET p_turn = 
+	    IF(p_color = 'R', 'B',
+	    IF(p_color = 'B', 'Y',
+	    IF(p_color = 'Y', 'G',
+	    IF(p_color = 'G', 'R', p_turn))));
     END//
 DELIMITER ;
 
