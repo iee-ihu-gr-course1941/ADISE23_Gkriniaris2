@@ -33,9 +33,8 @@ CREATE TABLE IF NOT EXISTS `board` (
   PRIMARY KEY (`x`,`y`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.board: ~122 rows (approximately)
+-- Dumping data for table gkriniaris.board: ~121 rows (approximately)
 INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
-	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -172,9 +171,8 @@ CREATE TABLE IF NOT EXISTS `board_empty` (
   PRIMARY KEY (`x`,`y`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table gkriniaris.board_empty: ~122 rows (approximately)
+-- Dumping data for table gkriniaris.board_empty: ~121 rows (approximately)
 INSERT INTO `board_empty` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
-	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
