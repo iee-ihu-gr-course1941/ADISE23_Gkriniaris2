@@ -33,8 +33,7 @@ function fillBoardByData(data){
         var o = data[i];
         var id = '#square_' + o.x + ' ' + o.y ;
         var c = (o.piece!=null)?o.piece_color + o.piece: '';
-        var im = c;
-        // var im = (o.piece!=null)?'<img class="piece" src="images/' +c+'.png">':''; 
+        var im = (o.piece!=null)?'<img class="piece" src="images/' +c+'.png">':''; 
         $(id).addClass(o.b_color+'_square').html(im);
          
     }
