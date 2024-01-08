@@ -1,10 +1,3 @@
-$( function(){
-    drawEmptyBoard();
-    fillBoard();
-}
-);
-
-
 function drawEmptyBoard(){
     var t='<table id="gkriniarisTable">';
     for(var i=11; i>0; i--){
@@ -19,26 +12,9 @@ function drawEmptyBoard(){
     $('#gkriniarisBoard').html(t);
 }
 
-
-function fillBoard(){
-    $.ajax(
-        {url: "gkriniaris.php/board/",
-        success: fillBoardByData
-        }
-    );
-}
+$(drawEmptyBoard);
 
 
 
-function fillBoardByData(data){
-    for (var i=0; i<data.length; i++){
-        var o = data[i];
-        var id = '#square_' + o.x + ' ' + o.y ;
-        var c = (o.piece!=null)?o.piece_color + o.piece: '';
-        var im = (o.piece!=null)?'<img class="piece" src="images/' +c+'.png">':''; 
-        $(id).addClass(o.b_color+'_square').html(im);
-         
-    }
-}
 
 
