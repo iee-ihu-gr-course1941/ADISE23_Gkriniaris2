@@ -1,6 +1,7 @@
 $( function(){
     drawEmptyBoard();
     fillBoard();
+    $('#board_reset').click(reseat_board);
 }
 );
 
@@ -21,6 +22,14 @@ function drawEmptyBoard(){
 function fillBoard(){
     $.ajax(
         {url: "BdGr.php/board/",
+        success: fillBoardByData
+        }
+    );
+}
+function reseat_board(){
+    $.ajax(
+        {url: "BdGr.php/board/",
+        method: 'post',
         success: fillBoardByData
         }
     );
