@@ -52,6 +52,19 @@ function handle_piece($method, $x, $y, $input)
 
 function handle_player($method, $p, $input)
 {
+    switch($b=array_shift($p))
+    {
+        case 'R':
+        case 'B': handle_user($method, $b, $input);
+            break;
+        case 'Y': handle_user($method, $b, $input);
+            break;
+        case 'G': handle_user($method, $b, $input);
+            break;
+        default: header("HTTP/1.1 404 Not Found");
+            print json_encode(['errormesg'=>"Player $b not found."]);
+            break;
+    }
     ;
 }
 
