@@ -1,7 +1,7 @@
 $( function(){
     drawEmptyBoard();
     fillBoard();
-    $('#board_reset').click(reseat_board);
+    $('#gkriniarisReset').click(reset_board);
 }
 );
 
@@ -26,7 +26,7 @@ function fillBoard(){
         }
     );
 }
-function reseat_board(){
+function reset_board(){
     $.ajax(
         {url: "BdGr.php/board/",
         method: 'post',
