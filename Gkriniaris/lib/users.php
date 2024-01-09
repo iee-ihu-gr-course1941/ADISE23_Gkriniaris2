@@ -9,6 +9,9 @@ function handle_user($method, $b, $input)
     }
 }
 
+
+
+
 function show_user($b)
 {
     global $mysqli;
@@ -20,6 +23,9 @@ function show_user($b)
 	header('Content-type: application/json');
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
+
+
+
 function set_user($b,$input)
 {
     //print_r($input);
@@ -57,7 +63,7 @@ function set_user($b,$input)
     $st->execute();
     $res = $st->get_result();
     header('Content-type: application/json');
-    print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+    print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT); 
 }
 
 ?>
