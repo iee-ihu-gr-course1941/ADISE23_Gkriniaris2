@@ -41,9 +41,10 @@ function fillBoardByData(data){
     for (var i=0; i<data.length; i++){
         var o = data[i];
         var id = '#square_' + o.x + '_' + o.y ;
-        var c = (o.piece!=null)?o.piece_color + o.piece :'';
-        var pc= (o.piece!=null)?'piece'+o.piece_color:'';
-        var im = (o.piece!=null)?'<img class="piece" src="images/' +c+'.png">':''; 
+        // var c = (o.piece!=null)?o.piece_color + o.piece :'';
+        // var pc= (o.piece!=null)?'piece'+o.piece_color:'';
+        var z= (o.piece!=null)?''+o.piece_color:'';
+        var im = (o.piece!=null)?'<img class="piece" src="images/' +z+'.png">':''; 
         $(id).addClass(o.b_color+'_square').html(im);
          
     }
