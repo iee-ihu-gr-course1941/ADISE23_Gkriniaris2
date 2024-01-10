@@ -30,7 +30,7 @@ function do_move() {
 		alert('Must give 4 numbers');
 		return;
 	}
-	$.ajax({url: "chess.php/board/piece/"+a[0]+'/'+a[1], 
+	$.ajax({url: "BdGr.php/board/piece/"+a[0]+'/'+a[1], 
 			method: 'PUT',
 			dataType: "json",
 			contentType: 'application/json',
@@ -39,6 +39,12 @@ function do_move() {
 			success: move_result,
 			error: login_error});
 	
+}
+
+
+function move_result(data){
+	game_status_update();
+	fillBoardByData(data);
 }
 
 
