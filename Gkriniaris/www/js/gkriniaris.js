@@ -139,7 +139,7 @@ function update_info(){
 
 
  function game_status_update() {
-	//clearTimeout(timer);
+	 clearTimeout(timer);
 	$.ajax({url: "BdGr.php/status/", success: update_status/* headers: {"X-Token": me.token} */ });
 }
 
