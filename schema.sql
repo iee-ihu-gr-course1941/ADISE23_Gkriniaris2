@@ -14,6 +14,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for gkriniaris
+CREATE DATABASE IF NOT EXISTS `gkriniaris` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `gkriniaris`;
+
 -- Dumping structure for πίνακας gkriniaris.board
 DROP TABLE IF EXISTS `board`;
 CREATE TABLE IF NOT EXISTS `board` (
@@ -320,7 +325,24 @@ CREATE TABLE IF NOT EXISTS `dice` (
   PRIMARY KEY (`piece`,`created_at`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.dice: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.dice: ~16 rows (approximately)
+INSERT INTO `dice` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.dice_empty
 DROP TABLE IF EXISTS `dice_empty`;
@@ -338,7 +360,24 @@ CREATE TABLE IF NOT EXISTS `dice_empty` (
   PRIMARY KEY (`piece`,`created_at`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.dice_empty: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.dice_empty: ~16 rows (approximately)
+INSERT INTO `dice_empty` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
+	(1, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.game_status
 DROP TABLE IF EXISTS `game_status`;
