@@ -3,15 +3,23 @@
 require_once  "../lib/dbconnect.php";
 require_once  "../lib/board.php";
 require_once  "../lib/game.php";
-require_once "lib/users.php";
+require_once "../lib/users.php";
 
 
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/',trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
 
-print_r($_SERVER);
-exit;
+
+if($input==null) {
+    $input=[];
+}
+if(isset($_SERVER['HTTP_X_TOKEN'])) {
+    $input['token']=$_SERVER['HTTP_X_TOKEN'];
+} else {
+    $input['token']='';
+}
+
 
 switch ($r=array_shift($request)){
     case 'board' :
@@ -34,6 +42,8 @@ switch ($r=array_shift($request)){
     default:  header("HTTP/1.1 404 Not Found");
                     exit;
 }
+
+
 function handle_board($method)
 {
     if($method=='GET'){
@@ -46,6 +56,7 @@ function handle_board($method)
 
 }
 
+
 function handle_piece($method, $x, $y, $input)
 {
     if($method=='GET') {
@@ -54,6 +65,7 @@ function handle_piece($method, $x, $y, $input)
         move_piece($x,$y,$input['x'],$input['y'],$input['token']);
     }   
 }
+
 
 function handle_player($method, $p, $input)
 {
@@ -72,6 +84,7 @@ function handle_player($method, $p, $input)
     }
     ;
 }
+
 
 function handle_status($method)
 {

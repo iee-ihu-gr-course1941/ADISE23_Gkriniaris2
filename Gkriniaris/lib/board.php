@@ -79,6 +79,25 @@ function show_board() {
 }
 
 
+function convert_board(&$orig_board) {
+	$board=[];
+	foreach($orig_board as $i=>&$row) {
+		$board[$row['x']][$row['y']] = &$row;
+	} 
+	return($board);
+}
+
+
+function read_board() {
+	global $mysqli;
+	$sql = 'select * from board';
+	$st = $mysqli->prepare($sql);
+	$st->execute();
+	$res = $st->get_result();
+	return($res->fetch_all(MYSQLI_ASSOC));
+}
+
+
 function reset_board() {
     global $mysqli;
 
@@ -99,5 +118,25 @@ function show_piece($x,$y) {
 	header('Content-type: application/json');
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
+
+
+function show_board_by_player($b) {
+
+	global $mysqli;
+
+	$orig_board=read_board();
+	$board=convert_board($orig_board);
+	$status = read_status();
+	if($status['status']=='started' && $status['p_turn']==$b && $b!=null) {
+		// It my turn !!!!
+		$n = add_valid_moves_to_board($board,$b);
+		
+		// Εάν n==0, τότε έχασα !!!!!
+		// Θα πρέπει να ενημερωθεί το game_status.
+	}
+	header('Content-type: application/json');
+	print json_encode($orig_board, JSON_PRETTY_PRINT);
+}
+
 
 ?>
