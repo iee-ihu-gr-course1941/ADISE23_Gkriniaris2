@@ -38,7 +38,7 @@ function move_piece($x,$y,$x2,$y2,$token){
 		exit;
 	}
 
-    
+
 	foreach($board[$x][$y]['moves'] as $i=>$move) {
 		if($x2==$move['x'] && $y2==$move['y']) {
 			do_move($x,$y,$x2,$y2);
