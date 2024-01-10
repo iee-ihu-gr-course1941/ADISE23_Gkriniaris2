@@ -96,8 +96,8 @@ function login_to_game() {
 		return;
 	}
 	var p_color = $('#pcolor').val();
-    draw_empty_board(p_color);
-	fill_board();
+    drawEmptyBoard(p_color);
+	fillBoard();
 
 	
 	$.ajax({url: "BdGr.php/players/"+p_color, 
