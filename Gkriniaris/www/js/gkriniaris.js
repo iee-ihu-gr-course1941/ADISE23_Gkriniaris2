@@ -7,22 +7,52 @@ $( function(){
     drawEmptyBoard();
     fillBoard();
     $('#gkriniarisReset').click(reset_board);
-    $('#gkriniarisLogin').click( login_to_game);
+    $('#gkriniarisLogin').click(login_to_game);
 }
 );
 
 
-function drawEmptyBoard(){
-    var t='<table id="gkriniarisTable">';
+function drawEmptyBoard(p){
+
+
+	/* var t='<table id="gkriniarisTable">';
     for(var i=11; i>0; i--){
         t+= '<tr>';
         for(var j=1; j<12; j++){
             t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j + ','+ i +'</td>';
-        }
-        t += '</tr>';
-    }
-    t+='</table>';
+        } 
+        t += '</tr>'; */
+
+
+	if(p!='Y' && p!='G' && p!='B' ){p='R';} 
+	if (p!='Y' && p!='R' && p!='B' ){p='G';}
+	if (p!='Y' && p!='G' && p!='R' ){p='B';}
+	if (p!='R' && p!='G' && p!='R' ){p='Y';}
+
+
+	var draw_init = {
+		'R': {i1:11,i2:0,istep:-1,j1:1,j2:12,jstep:1},
+		'Y': {i1:1,i2:12,istep:1, j1:11,j2:0,jstep:-1},
+	    'B': {i1:11,i2:0,istep:-1,j1:11,j2:0,jstep:-1},
+		'G': {i1:1,i2:12,istep:1, j1:1,j2:12,jstep:1} 
+		 
+	};
+	var s=draw_init[p];
+	var t='<table id="gkriniarisTable">';
+	for(var i=s.i1;i!=s.i2;i+=s.istep) {
+		t += '<tr>';
+		for(var j=s.j1;j!=s.j2;j+=s.jstep) {
+			t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
+		} 
+	}
+    t+='</table>'; 
     $('#gkriniarisBoard').html(t);
+
+
+
+
+
+
 }
 
 function fillBoard(){
@@ -68,15 +98,16 @@ function login_to_game() {
 	var p_color = $('#pcolor').val();
     draw_empty_board(p_color);
 	fill_board();
+
 	
 	$.ajax({url: "BdGr.php/players/"+p_color, 
 			method: 'PUT',
 			dataType: "json",
-			//headers: {"X-Token": me.token},
+			headers: {"X-Token": me.token},
 			contentType: 'application/json',
 			data: JSON.stringify( {username: $('#username').val(), piece_color: p_color}),
-			success: login_result,
-			error: login_error});
+			success: login_result ,
+			error: login_error });
 }
 
 
@@ -96,12 +127,24 @@ function update_info(){
 
 
 
-function login_error(data,y,z,c) {
+  function login_error(data,y,z,c) {
 	var x = data.responseJSON;
-	alert(x.errormesg);
+	if (x && x.errormesg) {
+		alert(x.errormesg);
+	  } else {
+		alert("Μη ορισμένο μήνυμα σφάλματος");
+	  }
+}  
+
+
+
+ function game_status_update() {
+	//clearTimeout(timer);
+	$.ajax({url: "BdGr.php/status/", success: update_status/* headers: {"X-Token": me.token} */ });
 }
 
 
+ 
 function update_status(data) {
 	last_update=new Date().getTime();
 	var game_stat_old = game_status;
@@ -109,6 +152,7 @@ function update_status(data) {
 	update_info();
 	clearTimeout(timer);
 	if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
+
 		x=0;
 		// do play
 		if(game_stat_old.p_turn!=game_status.p_turn) {
@@ -120,6 +164,7 @@ function update_status(data) {
 		// must wait for something
 		$('#move_div').hide(1000);
 		timer=setTimeout(function() { game_status_update();}, 4000);
+
 	}
  	
 }
