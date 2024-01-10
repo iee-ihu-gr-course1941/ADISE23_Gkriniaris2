@@ -8,12 +8,23 @@ TD.W_square {background-color:white;}
 TD.GR_square {background-color: #b8b8b8;}
 IMG.piece {width: 2.1em; height: 2.8em;}
 
-.row{
-    display:flex;
-    column-gap: 20px;
-    position: relative;
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
 }
 
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}  
+.float-child1 {
+    width: 10%;
+    float: left;
+    padding: 20px;
+    border: 2px solid red;
+}  
 
 .dice{
     width: 100%;
