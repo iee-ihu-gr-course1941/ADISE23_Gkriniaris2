@@ -139,4 +139,45 @@ function show_board_by_player($b) {
 }
 
 
+function add_valid_moves_to_board(&$board,$b) {
+	$number_of_moves=0;
+	
+	for($x=1;$x<9;$x++) {
+		for($y=1;$y<9;$y++) {
+			$number_of_moves+=add_valid_moves_to_piece($board,$b,$x,$y);
+		}
+	}
+	return($number_of_moves);
+}
+
+
+function add_valid_moves_to_piece(&$board,$b,$x,$y) {
+	$number_of_moves=0;
+	if($board[$x][$y]['piece_color']==$b) {
+		switch($board[$x][$y]['piece']){
+			case 'PB1': $number_of_moves+=pb1_moves($board,$b,$x,$y);break;
+			case 'PB2': $number_of_moves+=pb2_moves($board,$b,$x,$y);break;
+			case 'PB3': $number_of_moves+=pb3_moves($board,$b,$x,$y);break;
+            case 'PB4': $number_of_moves+=pb4_moves($board,$b,$x,$y);break;
+
+			case 'PG1': $number_of_moves+=pg1_moves($board,$b,$x,$y);break;
+            case 'PG2': $number_of_moves+=pg2_moves($board,$b,$x,$y);break;
+            case 'PG3': $number_of_moves+=pg3_moves($board,$b,$x,$y);break;
+            case 'PG4': $number_of_moves+=pg4_moves($board,$b,$x,$y);break;
+
+			case 'PY1': $number_of_moves+=py1_moves($board,$b,$x,$y);break;
+            case 'PY2': $number_of_moves+=py2_moves($board,$b,$x,$y);break;
+            case 'PY3': $number_of_moves+=py3_moves($board,$b,$x,$y);break;
+            case 'PY4': $number_of_moves+=py4_moves($board,$b,$x,$y);break;
+
+			case 'PR1': $number_of_moves+=pr1_moves($board,$b,$x,$y);break;
+            case 'PR2': $number_of_moves+=pr2_moves($board,$b,$x,$y);break;
+            case 'PR3': $number_of_moves+=pr3_moves($board,$b,$x,$y);break;
+            case 'PR4': $number_of_moves+=pr4_moves($board,$b,$x,$y);break;
+		}
+	} 
+	return($number_of_moves);
+}
+
+
 ?>
