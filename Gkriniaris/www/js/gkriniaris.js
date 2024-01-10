@@ -8,8 +8,27 @@ $( function(){
     fillBoard();
     $('#gkriniarisReset').click(reset_board);
     $('#gkriniarisLogin').click(login_to_game);
+	// $('#move_div').hide(1000);
+	$('#bD').click(roll_dice);
 }
 );
+
+
+function roll_dice() {
+    var randomDice = Math.floor((Math.random() * 6) + 1);
+    var dL = '<img class="dice" src="images/' + randomDice + '.png">';
+	
+    $('#rollDice').html(dL);
+}
+
+
+
+
+
+
+
+
+
 
 
 function drawEmptyBoard(p){
@@ -25,9 +44,9 @@ function drawEmptyBoard(p){
 
 
 	if(p!='Y' && p!='G' && p!='B' ){p='R';} 
-	if (p!='Y' && p!='R' && p!='B' ){p='G';}
-	if (p!='Y' && p!='G' && p!='R' ){p='B';}
-	if (p!='R' && p!='G' && p!='R' ){p='Y';}
+	else if (p!='Y' && p!='R' && p!='B' ){p='G';}
+	else if (p!='Y' && p!='G' && p!='R' ){p='B';}
+	else if (p!='R' && p!='G' && p!='R' ){p='Y';}
 
 
 	var draw_init = {
@@ -153,7 +172,7 @@ function update_status(data) {
 	//clearTimeout(timer);
 	 
     
-    /* if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
+     if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
 		x=0;
 		// do play
 		if(game_stat_old.p_turn!=game_status.p_turn) {
@@ -165,7 +184,7 @@ function update_status(data) {
 		// must wait for something
 		$('#move_div').hide(1000);
 		timer=setTimeout(function() { game_status_update();}, 4000);
-	}  */
+	}  
  	
 } 
 
