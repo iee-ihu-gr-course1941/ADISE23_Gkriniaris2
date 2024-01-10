@@ -15,7 +15,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Dumping structure for πίνακας gkriniaris.board
-DROP TABLE IF EXISTS `board`;
 CREATE TABLE IF NOT EXISTS `board` (
   `x` tinyint(1) NOT NULL,
   `y` tinyint(1) NOT NULL,
@@ -154,7 +153,6 @@ INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_p
 	(11, 11, 'Y', 'Y', 'PY4', NULL, NULL, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.board_empty
-DROP TABLE IF EXISTS `board_empty`;
 CREATE TABLE IF NOT EXISTS `board_empty` (
   `x` tinyint(1) NOT NULL,
   `y` tinyint(1) NOT NULL,
@@ -293,7 +291,6 @@ INSERT INTO `board_empty` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`
 	(11, 11, 'Y', 'Y', 'PY4', NULL, NULL, NULL, NULL);
 
 -- Dumping structure for procedure gkriniaris.clean_board
-DROP PROCEDURE IF EXISTS `clean_board`;
 DELIMITER //
 CREATE PROCEDURE `clean_board`()
 BEGIN 
@@ -303,7 +300,6 @@ END//
 DELIMITER ;
 
 -- Dumping structure for πίνακας gkriniaris.dice
-DROP TABLE IF EXISTS `dice`;
 CREATE TABLE IF NOT EXISTS `dice` (
   `prev_x` tinyint(4) DEFAULT NULL,
   `prev_y` tinyint(4) DEFAULT NULL,
@@ -338,7 +334,6 @@ INSERT INTO `dice` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`
 	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.dice_empty
-DROP TABLE IF EXISTS `dice_empty`;
 CREATE TABLE IF NOT EXISTS `dice_empty` (
   `prev_x` tinyint(4) DEFAULT NULL,
   `prev_y` tinyint(4) DEFAULT NULL,
@@ -373,7 +368,6 @@ INSERT INTO `dice_empty` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p
 	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.game_status
-DROP TABLE IF EXISTS `game_status`;
 CREATE TABLE IF NOT EXISTS `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
   `p_turn` enum('R','G','B','Y') DEFAULT NULL,
@@ -381,12 +375,11 @@ CREATE TABLE IF NOT EXISTS `game_status` (
   `last_change` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.game_status: ~1 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
-	('', NULL, NULL, '2024-01-10 06:02:48');
+	('started', 'B', 'D', '2023-12-14 13:41:39');
 
 -- Dumping structure for procedure gkriniaris.move_piece
-DROP PROCEDURE IF EXISTS `move_piece`;
 DELIMITER //
 CREATE PROCEDURE `move_piece`(
 	IN `x1` TINYINT,
@@ -418,21 +411,20 @@ BEGIN
 DELIMITER ;
 
 -- Dumping structure for πίνακας gkriniaris.players
-DROP TABLE IF EXISTS `players`;
 CREATE TABLE IF NOT EXISTS `players` (
   `username` varchar(20) DEFAULT NULL,
   `piece_color` enum('R','G','B','Y') NOT NULL,
   `token` varchar(100) DEFAULT NULL,
-  `last_action` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `last_action` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`piece_color`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table gkriniaris.players: ~4 rows (approximately)
 INSERT INTO `players` (`username`, `piece_color`, `token`, `last_action`) VALUES
-	(NULL, 'R', NULL, '2024-01-10 06:11:20'),
-	(NULL, 'G', NULL, '2024-01-10 06:11:22'),
-	(NULL, 'B', NULL, '2024-01-10 06:11:24'),
-	(NULL, 'Y', NULL, '2024-01-10 05:26:36');
+	(NULL, 'R', NULL, NULL),
+	(NULL, 'G', NULL, NULL),
+	(NULL, 'B', NULL, NULL),
+	(NULL, 'Y', NULL, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

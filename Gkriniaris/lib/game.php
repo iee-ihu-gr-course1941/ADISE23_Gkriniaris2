@@ -19,13 +19,24 @@ function show_status() {
 function update_game_status() {
 	global $mysqli;
 	
-	$status = read_status();
+	//$status = read_status();
+
+
+
+	/* $sql = 'select * from game_status';
+	$st = $mysqli->prepare($sql);
+	$st->execute();
+	$res3 = $st->get_result();
+	//$status = $res->fetcg_assoc(); */
 	
+
+
+
 	
 	$new_status=null;
 	$new_turn=null;
 	
-	$st3=$mysqli->prepare('select count(*) as aborted from players WHERE last_action< (NOW() - INTERVAL 5 MINUTE)');
+	/* $st3=$mysqli->prepare('select count(*) as aborted from players WHERE last_action< (NOW() - INTERVAL 5 MINUTE)');
 	$st3->execute();
 	$res3 = $st3->get_result();
 	$aborted = $res3->fetch_assoc()['aborted'];
@@ -36,7 +47,7 @@ function update_game_status() {
 		if($status['status']=='started') {
 			$new_status='aborted';
 		}
-	}
+	} */
 
 	
 	$sql = 'select count(*) as c from players where username is not null';
@@ -51,7 +62,7 @@ function update_game_status() {
 		case 1: $new_status='initialized'; break;
 		case 2: $new_status='started'; 
 				if($status['p_turn']==null) {
-					$new_turn='W'; // It was not started before...
+					$new_turn='R'; // It was not started before...
 				}
 				break;
 	}
