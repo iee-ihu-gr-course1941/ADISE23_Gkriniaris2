@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Διακομιστής:                  127.0.0.1
--- Έκδοση διακομιστή:            10.4.27-MariaDB - mariadb.org binary distribution
+-- Έκδοση διακομιστή:            10.4.32-MariaDB - mariadb.org binary distribution
 -- Λειτ. σύστημα διακομιστή:     Win64
 -- HeidiSQL Έκδοση:              12.6.0.6765
 -- --------------------------------------------------------
@@ -13,6 +13,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Dumping database structure for gkriniaris
+CREATE DATABASE IF NOT EXISTS `gkriniaris` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `gkriniaris`;
 
 -- Dumping structure for πίνακας gkriniaris.board
 DROP TABLE IF EXISTS `board`;
@@ -29,8 +34,9 @@ CREATE TABLE IF NOT EXISTS `board` (
   PRIMARY KEY (`x`,`y`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.board: ~121 rows (approximately)
+-- Dumping data for table gkriniaris.board: ~122 rows (approximately)
 INSERT INTO `board` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
+	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -168,8 +174,9 @@ CREATE TABLE IF NOT EXISTS `board_empty` (
   PRIMARY KEY (`x`,`y`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table gkriniaris.board_empty: ~121 rows (approximately)
+-- Dumping data for table gkriniaris.board_empty: ~122 rows (approximately)
 INSERT INTO `board_empty` (`x`, `y`, `b_color`, `piece_color`, `piece`, `r_path`, `b_path`, `y_path`, `g_path`) VALUES
+	(0, 0, 'B', NULL, NULL, NULL, NULL, NULL, NULL),
 	(1, 1, 'R', 'R', 'PR1', NULL, NULL, NULL, NULL),
 	(1, 2, 'R', 'R', 'PR2', NULL, NULL, NULL, NULL),
 	(1, 3, 'GR', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -311,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `dice` (
   `new_y` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `p_turn` enum('R','G','B','Y') DEFAULT NULL,
-  `piece` varchar(3) NOT NULL,
+  `piece` enum('PB1','PB2','PB3','PB4','PG1','PG2','PG3','PG4','PY1','PY2','PY3','PY4','PR1','PR2','PR3','PR4') NOT NULL,
   `dice` tinyint(4) DEFAULT NULL,
   `prev_path` tinyint(4) DEFAULT NULL,
   `new_path` tinyint(4) DEFAULT NULL,
@@ -320,22 +327,22 @@ CREATE TABLE IF NOT EXISTS `dice` (
 
 -- Dumping data for table gkriniaris.dice: ~16 rows (approximately)
 INSERT INTO `dice` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
-	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
-	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
-	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
-	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
-	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
-	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
-	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
-	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
-	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
-	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
-	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
-	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
-	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
-	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
-	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
-	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
+	(1, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.dice_empty
 DROP TABLE IF EXISTS `dice_empty`;
@@ -346,31 +353,31 @@ CREATE TABLE IF NOT EXISTS `dice_empty` (
   `new_y` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `p_turn` enum('R','G','B','Y') DEFAULT NULL,
-  `piece` varchar(3) NOT NULL,
+  `piece` enum('PB1','PB2','PB3','PB4','PG1','PG2','PG3','PG4','PY1','PY2','PY3','PY4','PR1','PR2','PR3','PR4') NOT NULL,
   `dice` tinyint(4) DEFAULT NULL,
   `prev_path` tinyint(4) DEFAULT NULL,
   `new_path` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`piece`,`created_at`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table gkriniaris.dice_empty: ~16 rows (approximately)
 INSERT INTO `dice_empty` (`prev_x`, `prev_y`, `new_x`, `new_y`, `created_at`, `p_turn`, `piece`, `dice`, `prev_path`, `new_path`) VALUES
-	(1, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB1', 0, NULL, NULL),
-	(1, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB2', 0, NULL, NULL),
-	(2, 10, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB3', 0, NULL, NULL),
-	(2, 11, NULL, NULL, '2023-12-14 13:14:32', 'B', 'PB4', 0, NULL, NULL),
-	(10, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG1', 0, NULL, NULL),
-	(10, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG2', 0, NULL, NULL),
-	(11, 1, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG3', 0, NULL, NULL),
-	(11, 2, NULL, NULL, '2023-12-14 13:14:32', 'G', 'PG4', 0, NULL, NULL),
-	(1, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR1', 0, NULL, NULL),
-	(1, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR2', 0, NULL, NULL),
-	(2, 1, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR3', 0, NULL, NULL),
-	(2, 2, NULL, NULL, '2023-12-14 13:14:32', 'R', 'PR4', 0, NULL, NULL),
-	(10, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY1', 0, NULL, NULL),
-	(10, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY2', 0, NULL, NULL),
-	(11, 10, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY3', 0, NULL, NULL),
-	(11, 11, NULL, NULL, '2023-12-14 13:14:32', 'Y', 'PY4', 0, NULL, NULL);
+	(1, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB1', 0, NULL, NULL),
+	(1, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB2', 0, NULL, NULL),
+	(2, 10, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB3', 0, NULL, NULL),
+	(2, 11, NULL, NULL, '2023-12-14 11:14:32', 'B', 'PB4', 0, NULL, NULL),
+	(10, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG1', 0, NULL, NULL),
+	(10, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG2', 0, NULL, NULL),
+	(11, 1, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG3', 0, NULL, NULL),
+	(11, 2, NULL, NULL, '2023-12-14 11:14:32', 'G', 'PG4', 0, NULL, NULL),
+	(10, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY1', 0, NULL, NULL),
+	(10, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY2', 0, NULL, NULL),
+	(11, 10, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY3', 0, NULL, NULL),
+	(11, 11, NULL, NULL, '2023-12-14 11:14:32', 'Y', 'PY4', 0, NULL, NULL),
+	(1, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR1', 0, NULL, NULL),
+	(1, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR2', 0, NULL, NULL),
+	(2, 1, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR3', 0, NULL, NULL),
+	(2, 2, NULL, NULL, '2023-12-14 11:14:32', 'R', 'PR4', 0, NULL, NULL);
 
 -- Dumping structure for πίνακας gkriniaris.game_status
 DROP TABLE IF EXISTS `game_status`;
@@ -381,9 +388,9 @@ CREATE TABLE IF NOT EXISTS `game_status` (
   `last_change` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table gkriniaris.game_status: ~0 rows (approximately)
+-- Dumping data for table gkriniaris.game_status: ~1 rows (approximately)
 INSERT INTO `game_status` (`status`, `p_turn`, `result`, `last_change`) VALUES
-	('', NULL, NULL, '2024-01-10 06:02:48');
+	('started', NULL, 'D', '2024-01-10 11:05:53');
 
 -- Dumping structure for procedure gkriniaris.move_piece
 DROP PROCEDURE IF EXISTS `move_piece`;
@@ -429,10 +436,10 @@ CREATE TABLE IF NOT EXISTS `players` (
 
 -- Dumping data for table gkriniaris.players: ~4 rows (approximately)
 INSERT INTO `players` (`username`, `piece_color`, `token`, `last_action`) VALUES
-	(NULL, 'R', NULL, '2024-01-10 06:11:20'),
-	(NULL, 'G', NULL, '2024-01-10 06:11:22'),
-	(NULL, 'B', NULL, '2024-01-10 06:11:24'),
-	(NULL, 'Y', NULL, '2024-01-10 05:26:36');
+	(NULL, 'R', NULL, NULL),
+	(NULL, 'G', NULL, NULL),
+	(NULL, 'B', NULL, NULL),
+	(NULL, 'Y', NULL, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
