@@ -66,8 +66,8 @@ function login_to_game() {
 		return;
 	}
 	var p_color = $('#pcolor').val();
-	// draw_empty_board(p_color);
-	//fill_board();
+    draw_empty_board(p_color);
+	fill_board();
 	
 	$.ajax({url: "BdGr.php/players/"+p_color, 
 			method: 'PUT',
@@ -85,7 +85,7 @@ function login_result(data) {
 	me = data[0];
 	$('#game_initializer').hide();
 	update_info();
-	//game_status_update();
+	game_status_update();
 }
 
 
@@ -99,6 +99,29 @@ function update_info(){
 function login_error(data,y,z,c) {
 	var x = data.responseJSON;
 	alert(x.errormesg);
+}
+
+
+function update_status(data) {
+	last_update=new Date().getTime();
+	var game_stat_old = game_status;
+	game_status=data[0];
+	update_info();
+	clearTimeout(timer);
+	if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
+		x=0;
+		// do play
+		if(game_stat_old.p_turn!=game_status.p_turn) {
+			fill_board();
+		}
+		$('#move_div').show(1000);
+		timer=setTimeout(function() { game_status_update();}, 15000);
+	} else {
+		// must wait for something
+		$('#move_div').hide(1000);
+		timer=setTimeout(function() { game_status_update();}, 4000);
+	}
+ 	
 }
 
 
