@@ -8,23 +8,31 @@ TD.W_square {background-color:white;}
 TD.GR_square {background-color: #b8b8b8;}
 IMG.piece {width: 2.1em; height: 2.8em;}
 
-.float-container {
-    border: 3px solid #fff;
-    padding: 20px;
+.container {
+    display: flex;
 }
 
-.float-child {
+.div1 {
     width: 50%;
     float: left;
     padding: 20px;
-    border: 2px solid red;
+    
 }  
-.float-child1 {
-    width: 10%;
+
+.div2 {
+    width: 30%;
     float: left;
     padding: 20px;
-    border: 2px solid red;
+    
 }  
+
+
+.div3{
+    width: 30%;
+    float: left;
+    padding: 20px;
+}
+
 
 .dice{
     width: 100%;

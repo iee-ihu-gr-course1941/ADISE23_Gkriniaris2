@@ -31,10 +31,13 @@
 
 
     <body>
+        
         <h1>ΓΚΡΙΝΙΑΡΗΣ</h1>
-        <div class="float-container">
-            <div id="gkriniarisBoard" class="float-child"></div>
-                <div class="float-child1">
+
+        <div class="container">
+            
+            <div id="gkriniarisBoard" class="div1"></div>
+                <div class="div2">
                     <div id="rollDice" class="dice"></div>
                     
                     <br>
@@ -45,44 +48,49 @@
                 </div>
             </div>
         
-    
         </div>
         
         
         
-        <br>
+        
+            <br>
+
+
+            <div>
+            <div class="div3">
+                <div id="game_initializer">
+                    <input id="username"> 
+                    <select id="pcolor">
+                        <option value="R">R</option> 
+                        <option value="B">B</option>
+                        <option value="Y">Y</option>
+                        <option value="G">G</option>
+
+                    </select>
+            
+            
+            
+                        <button id="gkriniarisLogin" class="btn btn-primary">ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button>
+                </div>
 
 
 
 
-        <div id="game_initializer">
-            <input id="username"> 
-            <select id="pcolor">
-            <option value="R">R</option> 
-            <option value="B">B</option>
-            <option value="Y">Y</option>
-            <option value="G">G</option>
 
-            </select>
-            <button id="gkriniarisLogin" class="btn btn-primary">ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button>
+                <br>
+        
+                <div id="game_info"></div>  <br>
+                    <div id="move_div">
+                        Δώσε κίνηση (x1 y1 x2 y2): <input id="the_move">  <button id="do_move' class='btn btn-primary">ΚΑΝΕ ΤΗΝ ΚΙΝΗΣΗ</button><br>
+                    </div>
+                    <br/><br/>
+        
+                    <button id="gkriniarisReset" class="btn btn-primary">ΕΝΑΡΞΗ</button><br>
+                </div>
+
             </div>
-
-
-
-
-
-        <br>
         
-        <div id="game_info"></div>  <br>
-        <div id="move_div">
-            Δώσε κίνηση (x1 y1 x2 y2): <input id="the_move">  <button id="do_move' class='btn btn-primary">ΚΑΝΕ ΤΗΝ ΚΙΝΗΣΗ</button><br>
-        </div>
-        <br/><br/>
         
-        <button id="gkriniarisReset" class="btn btn-primary">ΕΝΑΡΞΗ</button><br>
-
-        
-
 
         
         
