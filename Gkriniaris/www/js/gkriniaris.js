@@ -2,14 +2,14 @@ var me={token:null,piece_color:null};
 var game_status={};
 
 
-
 $( function(){
     drawEmptyBoard();
     fillBoard();
     $('#gkriniarisReset').click(reset_board);
     $('#gkriniarisLogin').click(login_to_game);
-	// $('#move_div').hide(1000);
+	$('#move_div').hide(1000);
 	$('#bD').click(roll_dice);
+	$('#do_move').click( do_move);
 }
 );
 
@@ -22,13 +22,24 @@ function roll_dice() {
 }
 
 
-
-
-
-
-
-
-
+function do_move() {
+	var s = $('#the_move').val();
+	
+	var a = s.trim().split(/[ ]+/);
+	if(a.length!=4) {
+		alert('Must give 4 numbers');
+		return;
+	}
+	$.ajax({url: "chess.php/board/piece/"+a[0]+'/'+a[1], 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {x: a[2], y: a[3]}),
+			headers: {"X-Token": me.token},
+			success: move_result,
+			error: login_error});
+	
+}
 
 
 function drawEmptyBoard(p){
