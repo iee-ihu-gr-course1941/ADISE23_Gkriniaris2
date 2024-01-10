@@ -12,17 +12,47 @@ $( function(){
 );
 
 
-function drawEmptyBoard(){
-    var t='<table id="gkriniarisTable">';
+function drawEmptyBoard(p){
+
+
+	/* var t='<table id="gkriniarisTable">';
     for(var i=11; i>0; i--){
         t+= '<tr>';
         for(var j=1; j<12; j++){
             t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j + ','+ i +'</td>';
-        }
-        t += '</tr>';
-    }
-    t+='</table>';
+        } 
+        t += '</tr>'; */
+
+
+	if(p!='Y' && p!='G' && p!='B' ){p='R';} 
+	if (p!='Y' && p!='R' && p!='B' ){p='G';}
+	if (p!='Y' && p!='G' && p!='R' ){p='B';}
+	if (p!='R' && p!='G' && p!='R' ){p='Y';}
+
+
+	var draw_init = {
+		'R': {i1:11,i2:0,istep:-1,j1:1,j2:12,jstep:1},
+		'Y': {i1:1,i2:12,istep:1, j1:11,j2:0,jstep:-1},
+	    'B': {i1:11,i2:0,istep:-1,j1:11,j2:0,jstep:-1},
+		'G': {i1:1,i2:12,istep:1, j1:1,j2:12,jstep:1} 
+		 
+	};
+	var s=draw_init[p];
+	var t='<table id="gkriniarisTable">';
+	for(var i=s.i1;i!=s.i2;i+=s.istep) {
+		t += '<tr>';
+		for(var j=s.j1;j!=s.j2;j+=s.jstep) {
+			t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
+		} 
+	}
+    t+='</table>'; 
     $('#gkriniarisBoard').html(t);
+
+
+
+
+
+
 }
 
 function fillBoard(){
