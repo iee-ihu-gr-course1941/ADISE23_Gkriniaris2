@@ -30,26 +30,28 @@ function roll_dice() {
 }
 
 
-
+const moveMap = [];
 
 function do_move() {
-	// randomDice
 	var s = $("$the_move").val();
-	
-	var a = s.trim().split(/[ ]+/);
-	if(a.length!=4) {
-		alert('Must give 4 numbers');
-		return;
-	}
-	$.ajax({url: "BdGr.php/board/piece/"+a[0]+'/'+a[1], 
+}
+		
+
+function piecePath(){
+
+	/* $.ajax({url: "BdGr.php/board/piece/"+s[0]+'/'+a[1], 
 			method: 'PUT',
 			dataType: "json",
 			contentType: 'application/json',
 			data: JSON.stringify( {x: a[2], y: a[3]}),
 			headers: {"X-Token": me.token},
 			success: move_result,
-			error: login_error});
+			error: login_error}); */
 	
+}
+
+function piecePath(){
+	//
 }
 
 
@@ -60,8 +62,6 @@ function do_move() {
 
 
 function drawEmptyBoard(p){
-
-
 	var t='<table id="gkriniarisTable">';
     for(var i=11; i>0; i--){
         t+= '<tr>';
@@ -72,12 +72,6 @@ function drawEmptyBoard(p){
 	}
     t+='</table>'; 
     $('#gkriniarisBoard').html(t);
-
-
-
-
-
-
 }
 
 function fillBoard(){
@@ -99,6 +93,8 @@ function reset_board(){
 
 
 function fillBoardByData(data){
+	
+
     for (var i=0; i<data.length; i++){
         var o = data[i];
         var id = '#square_' + o.x + '_' + o.y ;

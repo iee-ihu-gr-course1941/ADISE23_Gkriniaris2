@@ -179,5 +179,4 @@ function add_valid_moves_to_piece(&$board,$b,$x,$y) {
 	return($number_of_moves);
 }
 
-
 ?>
