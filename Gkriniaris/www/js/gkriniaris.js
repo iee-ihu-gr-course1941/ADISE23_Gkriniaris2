@@ -70,6 +70,38 @@ function do_move() {
 
 function piecePath(){
 	
+	
+	
+		
+		
+
+	
+	
+	
+
+
+		//moves = { '1': { x: 2, y: 3 } }
+		//const moves = { '1': 4, '2': 5 }
+	
+	
+	/* if(a.length!=4) {
+		alert('Must give 4 numbers');
+		return;
+	} */
+
+	/* $.ajax({url: "BdGr.php/board/piece/"+s[0]+'/'+a[1], 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {x: a[2], y: a[3]}),
+			headers: {"X-Token": me.token},
+			success: move_result,
+			error: login_error}); */
+	
+}
+
+function piecePath(){
+	;
 }
 
 
@@ -119,6 +151,8 @@ function reset_board(){
 
 
 function fillBoardByData(data){
+	
+
     for (var i=0; i<data.length; i++){
         var o = data[i];
         var id = '#square_' + o.x + '_' + o.y ;
