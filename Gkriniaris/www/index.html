@@ -41,7 +41,7 @@
                     <div id="rollDice" class="dice"></div>
                     
                     <br>
-                <div>
+                <div id="my_turn">
                     
                     <h1>Παίζεις..        <button id="bD" class="btn btn-primary">ΡΙΞΕ ΤΟ ΖΑΡΙ!</button> </h1>
         
@@ -74,19 +74,19 @@
                         <button id="gkriniarisLogin" class="btn btn-primary">ΕΙΣΟΔΟΣ ΣΤΟ ΠΑΙΧΝΙΔΙ</button>
                 </div>
 
-        <br>
-
-
-
-
-
-
-                <br>
         
-                <div id="game_info"></div>  <br>
+
+
+
+
+
+
+                
+        
+                 <div id="game_info"></div>  <br>
                     <div id="move_div">
-                        Δώσε κίνηση (x1 y1 x2 y2): <input id="the_move">  <button id="do_move' class='btn btn-primary">ΚΑΝΕ ΤΗΝ ΚΙΝΗΣΗ</button><br>
-                    </div>
+                       <h> Ο αριθμός σου είναι: <input id="the_move" type="text" oninput="showValue()" disabled>  <button id="do_move' class='btn btn-primary">ΚΑΝΕ ΤΗΝ ΚΙΝΗΣΗ</button> </h><br>
+                    </div> 
                     <br/><br/>
         
                     <button id="gkriniarisReset" class="btn btn-primary">ΕΝΑΡΞΗ</button><br>

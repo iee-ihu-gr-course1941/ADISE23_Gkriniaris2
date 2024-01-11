@@ -2,6 +2,7 @@ var me={token:null,piece_color:null};
 var game_status={};
 
 
+
 $( function(){
     drawEmptyBoard();
     fillBoard();
@@ -9,21 +10,31 @@ $( function(){
     $('#gkriniarisLogin').click(login_to_game);
 	$('#move_div').hide(1000);
 	$('#bD').click(roll_dice);
-	$('#do_move').click( do_move);
+	$('#do_move').click(do_move);
+	$('#my_turn').hide(1000);
+	
 }
 );
 
 
 function roll_dice() {
+	
+    
     var randomDice = Math.floor((Math.random() * 6) + 1);
     var dL = '<img class="dice" src="images/' + randomDice + '.png">';
+
+
+	
 	
     $('#rollDice').html(dL);
 }
 
 
+
+
 function do_move() {
-	var s = $('#the_move').val();
+	// randomDice
+	var s = $(document.getElementById(randomDice)).val();
 	
 	var a = s.trim().split(/[ ]+/);
 	if(a.length!=4) {
@@ -42,44 +53,22 @@ function do_move() {
 }
 
 
-function move_result(data){
-	game_status_update();
-	fillBoardByData(data);
-}
+// function move_result(data){
+// 	game_status_update();
+// 	fillBoardByData(data);
+// }
 
 
 function drawEmptyBoard(p){
 
 
-	/* var t='<table id="gkriniarisTable">';
+	var t='<table id="gkriniarisTable">';
     for(var i=11; i>0; i--){
         t+= '<tr>';
         for(var j=1; j<12; j++){
             t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j + ','+ i +'</td>';
         } 
-        t += '</tr>'; */
-
-
-	if(p!='Y' && p!='G' && p!='B' ){p='R';} 
-	else if (p!='Y' && p!='R' && p!='B' ){p='G';}
-	else if (p!='Y' && p!='G' && p!='R' ){p='B';}
-	else if (p!='R' && p!='G' && p!='R' ){p='Y';}
-
-
-	var draw_init = {
-		'R': {i1:11,i2:0,istep:-1,j1:1,j2:12,jstep:1},
-		'Y': {i1:1,i2:12,istep:1, j1:11,j2:0,jstep:-1},
-	    'B': {i1:11,i2:0,istep:-1,j1:11,j2:0,jstep:-1},
-		'G': {i1:1,i2:12,istep:1, j1:1,j2:12,jstep:1} 
-		 
-	};
-	var s=draw_init[p];
-	var t='<table id="gkriniarisTable">';
-	for(var i=s.i1;i!=s.i2;i+=s.istep) {
-		t += '<tr>';
-		for(var j=s.j1;j!=s.j2;j+=s.jstep) {
-			t += '<td class="gkriniarisSquare" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
-		} 
+        t += '</tr>'; 
 	}
     t+='</table>'; 
     $('#gkriniarisBoard').html(t);
@@ -175,36 +164,39 @@ function update_info(){
 
 
  function game_status_update() {
-	 clearTimeout(timer);
+	 //clearTimeout(timer);
 	$.ajax({url: "BdGr.php/status/", success: update_status/* headers: {"X-Token": me.token} */ });
 }
 
 
  
 function update_status(data) {
-	last_update=new Date().getTime();
-	var game_stat_old = game_status;
+	//last_update=new Date().getTime();
+	//var game_stat_old = game_status;
+	
 	game_status=data[0];
 	update_info();
 
-	//clearTimeout(timer);
+	
 	 
     
-     if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
+    
 
-	clearTimeout(timer);
+	//clearTimeout(timer);
 	if(game_status.p_turn==me.piece_color &&  me.piece_color!=null) {
 
 
 		x=0;
 		// do play
-		if(game_stat_old.p_turn!=game_status.p_turn) {
+		/* if(game_stat_old.p_turn!=game_status.p_turn) {
 			fill_board();
-		}
+		} */
+		$('#my_turn').show(1000);
 		$('#move_div').show(1000);
 		timer=setTimeout(function() { game_status_update();}, 15000);
 	} else {
 		// must wait for something
+		$('#my_turn').hide(1000);
 		$('#move_div').hide(1000);
 		timer=setTimeout(function() { game_status_update();}, 4000);
 
@@ -213,7 +205,7 @@ function update_status(data) {
 } 
 
 
-	}
+	
  	
 
 
