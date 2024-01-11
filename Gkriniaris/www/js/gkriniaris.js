@@ -22,7 +22,7 @@ function roll_dice() {
     
     var randomDice = Math.floor((Math.random() * 6) + 1);
     var dL = '<img class="dice" src="images/' + randomDice + '.png">';
-
+	$("$the_move").val(randomDice.toString());
 
 	
 	
@@ -34,7 +34,7 @@ function roll_dice() {
 
 function do_move() {
 	// randomDice
-	var s = $(document.getElementById(randomDice)).val();
+	var s = $("$the_move").val();
 	
 	var a = s.trim().split(/[ ]+/);
 	if(a.length!=4) {
