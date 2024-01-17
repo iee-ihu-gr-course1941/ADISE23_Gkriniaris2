@@ -22,37 +22,53 @@ function roll_dice() {
     
     var randomDice = Math.floor((Math.random() * 6) + 1);
     var dL = '<img class="dice" src="images/' + randomDice + '.png">';
-	$("$the_move").val(randomDice.toString());
+	
 
 	
 	
     $('#rollDice').html(dL);
+	$("#the_move").val(randomDice.toString());
 }
+/* 38 + 5 > length 
+5 - (length - 38);
+3
+
+const moveMap = [ { x: 5, y: 1}, { x:5, y: 2 }, ];
+const redStart = 0;
+var redCurrent = ;
 
 
-const moveMap = [];
+const redSimeioPrinFolia = { x: '', y: 0}
+
+if (moveMap[redCurrent] == redSimeioPrinFolia) bimata pou apomenoun < 4
+
+const redFolia = [ ]
+const blueFolia = []
+
+const blueStart  */
+
 
 function do_move() {
 	var s = $("$the_move").val();
 }
 		
 
-function piecePath(){
+/* function piecePath(){
 
-	/* $.ajax({url: "BdGr.php/board/piece/"+s[0]+'/'+a[1], 
+	 $.ajax({url: "BdGr.php/board/piece/"+s[0]+'/'+a[1], 
 			method: 'PUT',
 			dataType: "json",
 			contentType: 'application/json',
 			data: JSON.stringify( {x: a[2], y: a[3]}),
 			headers: {"X-Token": me.token},
 			success: move_result,
-			error: login_error}); */
+			error: login_error}); 
 	
-}
+} */
 
-function piecePath(){
+/* function piecePath(){
 	//
-}
+} */
 
 
 // function move_result(data){
